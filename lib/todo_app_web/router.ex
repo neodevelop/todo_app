@@ -68,6 +68,7 @@ defmodule TodoAppWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
     resources "/todos", TodoController
+    resources "/todos_lists", TodoListController
   end
 
   scope "/", TodoAppWeb do
