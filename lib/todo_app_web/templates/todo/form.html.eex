@@ -6,6 +6,7 @@
   <% end %>
 
   <%= hidden_input f, :user_id %>
+  <%= hidden_input f, :todo_list_id %>
 
   <%= label f, :description %>
   <%= text_input f, :description %>
