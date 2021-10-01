@@ -60,4 +60,9 @@ defmodule TodoAppWeb.TodoListController do
     |> put_flash(:info, "Todo list deleted successfully.")
     |> redirect(to: Routes.todo_list_path(conn, :index))
   end
+
+  def collaborators(conn, %{"id" => id}) do
+    todo_list = Todos.get_todo_list!(id)
+    render(conn, "collaborators.html", todo_list: todo_list)
+  end
 end
