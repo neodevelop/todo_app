@@ -36,6 +36,7 @@ defmodule TodoApp.Todos do
 
   """
   def get_todo!(id), do: Repo.get!(Todo, id)
+  def get_todo_with_list!(id), do: Repo.get!(Todo, id) |> Repo.preload(:todo_list)
 
   @doc """
   Creates a todo.
