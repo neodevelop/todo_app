@@ -1,0 +1,7 @@
+<h1><%= @todo_list.name %> list</h1>
+
+<h2>Collaborators</h2>
+<ul>
+</ul>
+
+<span><%= link "Edit", to: Routes.todo_list_path(@conn, :show, @todo_list.id) %></span>
