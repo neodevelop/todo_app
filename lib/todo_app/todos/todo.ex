@@ -14,7 +14,18 @@ defmodule TodoApp.Todos.Todo do
     timestamps()
   end
 
-  @doc false
+  @doc """
+  Creates a changeset from a map with params for Todo
+
+  ## Example
+
+      iex> alias TodoApp.Todos.Todo
+      iex> changeset = Todo.changeset(%Todo{}, %{"description" => "some description", "expiration" => "2021-12-12 00:00:00"})
+      iex> changeset.errors
+      []
+      iex> changeset.changes
+      %{description: "some description", expiration: ~N[2021-12-12 00:00:00]}
+  """
   def changeset(todo, attrs) do
     todo
     |> cast(attrs, [:description, :done, :expiration, :user_id, :todo_list_id])
