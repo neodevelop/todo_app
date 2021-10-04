@@ -2,6 +2,16 @@
 
 <h2>Collaborators</h2>
 <ul>
+  <%= #for collaborator <- @collaborators do %>
+    <li><%= #collaborator.email %></li>
+  <% #end %>
+</ul>
+
+<h2>Available users</h2>
+<ul>
+  <%= for user <- @users do %>
+    <li><%= user.email %></li>
+  <% end %>
 </ul>
 
 <span><%= link "Edit", to: Routes.todo_list_path(@conn, :show, @todo_list.id) %></span>
