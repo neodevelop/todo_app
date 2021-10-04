@@ -6,8 +6,16 @@ defmodule TodoApp.TodosTest do
   describe "todos" do
     alias TodoApp.Todos.Todo
 
-    @valid_attrs %{description: "some description", done: true, expiration: ~N[2010-04-17 14:00:00]}
-    @update_attrs %{description: "some updated description", done: false, expiration: ~N[2011-05-18 15:01:01]}
+    @valid_attrs %{
+      description: "some description",
+      done: true,
+      expiration: ~N[2010-04-17 14:00:00]
+    }
+    @update_attrs %{
+      description: "some updated description",
+      done: false,
+      expiration: ~N[2011-05-18 15:01:01]
+    }
     @invalid_attrs %{description: nil, done: nil, expiration: nil}
 
     def todo_fixture(attrs \\ %{}) do
@@ -67,10 +75,20 @@ defmodule TodoApp.TodosTest do
   end
 
   describe "users" do
-    alias TodoApp.Todos.User
+    alias TodoApp.Accounts.User
 
-    @valid_attrs %{born_date: ~D[2010-04-17], email: "some email", last_name: "some last_name", name: "some name"}
-    @update_attrs %{born_date: ~D[2011-05-18], email: "some updated email", last_name: "some updated last_name", name: "some updated name"}
+    @valid_attrs %{
+      born_date: ~D[2010-04-17],
+      email: "some email",
+      last_name: "some last_name",
+      name: "some name"
+    }
+    @update_attrs %{
+      born_date: ~D[2011-05-18],
+      email: "some updated email",
+      last_name: "some updated last_name",
+      name: "some updated name"
+    }
     @invalid_attrs %{born_date: nil, email: nil, last_name: nil, name: nil}
 
     def user_fixture(attrs \\ %{}) do
