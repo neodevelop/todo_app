@@ -10,6 +10,13 @@ defmodule TodoApp.Accounts do
   ## Database getters
 
   @doc """
+  Gets a list of users.
+  """
+  def list(_params \\ %{}) do
+    Repo.all(User)
+  end
+
+  @doc """
   Gets a user by email.
 
   ## Examples
