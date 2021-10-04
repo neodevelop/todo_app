@@ -19,6 +19,7 @@ defmodule TodoApp.Todos.TodoList do
     todo_list
     |> cast(attrs, [:name, :user_owner_id])
     |> validate_required([:name])
+    |> cast_assoc(:todos)
     |> foreign_key_constraint(:user_owner_id)
   end
 end
