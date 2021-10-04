@@ -1,7 +1,7 @@
 defmodule TodoAppWeb.TodoListController do
   use TodoAppWeb, :controller
 
-  alias TodoApp.Todos
+  alias TodoApp.{Todos, Accounts}
   alias TodoApp.Todos.TodoList
 
   def index(conn, _params) do
@@ -63,6 +63,7 @@ defmodule TodoAppWeb.TodoListController do
 
   def collaborators(conn, %{"id" => id}) do
     todo_list = Todos.get_todo_list!(id)
-    render(conn, "collaborators.html", todo_list: todo_list)
+    users = Accounts.list()
+    render(conn, "collaborators.html", todo_list: todo_list, users: users)
   end
 end
