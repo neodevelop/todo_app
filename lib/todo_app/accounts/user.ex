@@ -2,6 +2,8 @@ defmodule TodoApp.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias TodoApp.Todos.{TodoList, Collaborator}
+
   @derive {Inspect, except: [:password]}
   schema "users" do
     field :email, :string
@@ -9,7 +11,15 @@ defmodule TodoApp.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
 
+    many_to_many :todos_lists, TodoList, join_through: Collaborator
+
     timestamps()
+  end
+
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:email])
+    |> validate_required([:email])
   end
 
   @doc """

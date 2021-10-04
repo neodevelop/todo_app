@@ -1,12 +1,15 @@
 defmodule TodoApp.Todos.TodoList do
   use Ecto.Schema
   import Ecto.Changeset
-  alias TodoApp.Todos.Todo
+  alias TodoApp.Todos.{Todo, Collaborator}
+  alias TodoApp.Accounts.User
 
   schema "todos_lists" do
     field :name, :string
     field :user_owner_id, :id
     has_many :todos, Todo
+
+    many_to_many :users, User, join_through: Collaborator
 
     timestamps()
   end
