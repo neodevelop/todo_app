@@ -71,6 +71,8 @@ defmodule TodoAppWeb.Router do
     resources "/todos_lists", TodoListController
     get "/todos_lists/:id/collaborators", TodoListController, :collaborators
     post "/todos_lists/:id/collaborators", TodoListController, :add_collaborator
+
+    live "/todo_board", TodoLive.Index, :index
   end
 
   scope "/", TodoAppWeb do
