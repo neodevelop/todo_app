@@ -62,8 +62,22 @@ defmodule TodoAppWeb.TodoListController do
   end
 
   def collaborators(conn, %{"id" => id}) do
-    todo_list = Todos.get_todo_list!(id)
-    users = Accounts.list()
-    render(conn, "collaborators.html", todo_list: todo_list, users: users)
+    todo_list = Todos.get_todo_list_with_users!(id)
+    current_user = conn.assigns.current_user
+
+    users =
+      Accounts.list()
+      |> Enum.filter(&(&1 not in todo_list.users))
+      |> Enum.filter(fn u -> u != current_user end)
+
+    token = get_csrf_token()
+    render(conn, "collaborators.html", todo_list: todo_list, users: users, token: token)
+  end
+
+  def add_collaborator(conn, %{"id" => id, "user_email" => email}) do
+    # require IEx
+    # IEx.pry()
+    todo_list = Todos.add_collaborator_to_list(id, email)
+    redirect(conn, to: Routes.todo_list_path(conn, :collaborators, todo_list.id))
   end
 end
