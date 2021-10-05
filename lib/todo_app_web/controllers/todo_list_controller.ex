@@ -68,7 +68,7 @@ defmodule TodoAppWeb.TodoListController do
     users =
       Accounts.list()
       |> Enum.filter(&(&1 not in todo_list.users))
-      |> Enum.filter(fn u -> u != current_user end)
+      |> Enum.filter(&(&1 != current_user))
 
     token = get_csrf_token()
     render(conn, "collaborators.html", todo_list: todo_list, users: users, token: token)
