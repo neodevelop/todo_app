@@ -7,6 +7,7 @@ defmodule TodoApp.Todos do
   alias TodoApp.Repo
 
   alias TodoApp.Todos.Todo
+  alias TodoApp.Accounts
 
   @doc """
   Returns the list of todos.
@@ -200,5 +201,20 @@ defmodule TodoApp.Todos do
   """
   def change_todo_list(%TodoList{} = todo_list, attrs \\ %{}) do
     TodoList.changeset(todo_list, attrs)
+  end
+
+  def add_collaborator_to_list(todo_list_id, user_email) do
+    todo_list =
+      todo_list_id
+      |> get_todo_list!()
+      |> Repo.preload(:users)
+      |> Repo.preload(:todos)
+
+    user = user_email |> Accounts.get_user_by_email()
+
+    todo_list
+    |> change_todo_list(%{})
+    |> Ecto.Changeset.put_assoc(:users, [user | todo_list.users])
+    |> Repo.update!()
   end
 end
