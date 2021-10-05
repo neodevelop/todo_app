@@ -9,7 +9,7 @@ defmodule TodoApp.Todos.TodoList do
     field :user_owner_id, :id
     has_many :todos, Todo
 
-    many_to_many :users, User, join_through: Collaborator
+    many_to_many :users, User, join_through: Collaborator, on_replace: :delete
 
     timestamps()
   end
