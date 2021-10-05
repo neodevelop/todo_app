@@ -48,6 +48,7 @@ defmodule TodoAppWeb do
 
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
@@ -69,6 +70,26 @@ defmodule TodoAppWeb do
       import TodoAppWeb.ErrorHelpers
       import TodoAppWeb.Gettext
       alias TodoAppWeb.Router.Helpers, as: Routes
+    end
+  end
+
+  def live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {TodoAppWeb.LayoutView, "live.html"}
+
+      import Phoenix.LiveView.Helpers
+      import TodoAppWeb.LiveHelpers
+
+      unquote(view_helpers())
+    end
+  end
+
+  def live_component do
+    quote do
+      use Phoenix.LiveComponent
+
+      unquote(view_helpers())
     end
   end
 
