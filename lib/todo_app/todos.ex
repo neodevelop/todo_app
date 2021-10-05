@@ -135,6 +135,7 @@ defmodule TodoApp.Todos do
   def get_todo_list!(id), do: Repo.get!(TodoList, id)
 
   def get_todo_list_with_todos!(id), do: Repo.get!(TodoList, id) |> Repo.preload(:todos)
+  def get_todo_list_with_users!(id), do: Repo.get!(TodoList, id) |> Repo.preload(:users)
 
   @doc """
   Creates a todo_list.
