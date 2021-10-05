@@ -2,16 +2,22 @@
 
 <h2>Collaborators</h2>
 <ul>
-  <%= #for collaborator <- @collaborators do %>
-    <li><%= #collaborator.email %></li>
-  <% #end %>
-</ul>
-
-<h2>Available users</h2>
-<ul>
-  <%= for user <- @users do %>
-    <li><%= user.email %></li>
+  <%= for collaborator <- @todo_list.users do %>
+    <li><%= collaborator.email %></li>
   <% end %>
 </ul>
+
+  <h2>Available users</h2>
+  <ul>
+    <%= for user <- @users do %>
+      <li>
+        <form action="<%= Routes.todo_list_path(@conn, :add_collaborator, @todo_list.id) %>" method="post">
+          <input type="hidden" name="user_email" value="<%= user.email %>">
+          <input type="hidden" value="<%= @token %>" name="_csrf_token">
+          <%= user.email %> <button type="submit">Agregar colaborador</button>
+        </form>
+      </li>
+    <% end %>
+  </ul>
 
 <span><%= link "Edit", to: Routes.todo_list_path(@conn, :show, @todo_list.id) %></span>
